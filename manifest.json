@@ -1,0 +1,50 @@
+{
+"name": "下载插件",
+"version":"1.0.0.0",
+"author":"So",
+"manifest_version": 2,
+"description": "一键下载页面上的资源",
+"icons": { "128": "icon128.png" },
+"permissions": [
+  "activeTab",
+  "downloads",
+  "http://*.google.com/",
+   "https://*.google.com/"
+ ],
+"browser_action": {
+  "default_title": "",
+  "default_icon": {
+    "16":"./icon16.png",
+    "24":"./icon32.png",
+    "128":"./icon128.png",
+    "32":"./icon32.png"
+  },
+  "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      // "css": ["css/bootstrap.min.css","css/index.css"],
+      "js": ["js/jquery-3.2.1.min.js","js/main.js"]
+      // "run_at":"document_end"
+    }
+  ]
+  // "content_scripts": [  //content_scripts是在Web页面内运行的javascript脚本。
+  //                       //通过使用标准的DOM，它们可以获取浏览器所访问页面的详细信息，并可以修改这些信息。
+  //   {                   //这里的值是数组，可以针对多个站点进行不同的操作配置
+  //     "matches": [
+  //       "http://www.google.com/*"
+  //     ],
+  //     "css": [
+  //       "css/index.css"
+  //     ],
+  //     "js": [
+  //       // "js/jquery-3.2.1.min.js",
+  //       // "js/func.js",
+  //       "js/main.js"
+  //     ]
+  //     // "all_frames": true,
+  //     // "run_at": "document_idle"
+  //   }
+  // ]
+}

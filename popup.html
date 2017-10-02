@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>So的下载插件</title>
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/buttons.css">
+</head>
+<body>
+  <div class="container">
+    <div class="box row">
+      <div class="input-group input-group-sm">
+        <input id="filterInput" type="text" class="form-control" placeholder="过滤字符串或/ 正则/">
+        <div class="input-group-btn">
+          <button class="btn button-primary" id="filter">过滤</button>
+          <button class="btn  button-caution button-jumbo" id="download">下载</button>
+        </div>
+      </div>
+      <div class=" filter-group">
+        <button id='btn-img' class="button button-primary button-tiny"><i class="fa fa-plus"></i>图片</button>
+        <button id='btn-mp3' class="button button-primary button-tiny"><i class="fa fa-plus"></i>音乐</button>
+        <button id='btn-zip' class="button button-primary button-tiny"><i class="fa fa-plus"></i>zip/rar</button>
+        <button id='btn-pdf' class="button button-primary button-tiny"><i class="fa fa-plus"></i>pdf</button>
+        <button id='btn-doc' class="button button-primary button-tiny"><i class="fa fa-plus"></i>doc</button>
+      </div>
+      <div>
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="#filter-list" data-toggle="tab">过滤列表</a></li>
+          <li role="presentation" ><a data-toggle="tab" href="#downloading">下载队列</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="url-list tab-pane active" role="tabpanel" id="filter-list">
+            <div class="list-group list-group-sm">
+              <a href="#" class="list-group-item">点击过滤开始搜索</a>
+              <!-- 点击过滤开始搜索 -->
+            </div>
+          </div>
+          <div class="url-list tab-pane" role="tabpanel" id="downloading">
+            <div class="list-group list-group-sm">
+              <a href="#" class="list-group-item">暂无下载任务</a>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+</body>
+<script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/index.js"></script>
+</html>

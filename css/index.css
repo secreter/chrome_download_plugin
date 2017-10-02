@@ -1,0 +1,19 @@
+.box{
+  margin:5px;
+  padding: 5px;
+  /*border: solid #888 1px;*/
+  width: 350px;
+}
+.url-list{
+  margin-top: 10px;
+  max-height: 400px;
+  overflow: auto;
+}
+.list-group-item{
+  padding: 5px 10px !important;
+}
+.filter-group{
+  margin:5px 0;
+  display: flex;
+  justify-content: space-between;
+}
