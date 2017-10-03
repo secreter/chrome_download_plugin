@@ -1,8 +1,7 @@
 // document.body.style.backgroundColor = 'blue'
 function getDownloadUrls (filterStr) {
-  let urls1 = getLinkUrl(), urls2 = getImgUrl()
-  let urls = [...urls1, ...urls2]
-  console.warn(filter(urls, filterStr))
+  let urls1 = getLinkUrl(), urls2 = getImgUrl(), urls3 = getVideoUrl()
+  let urls = [...urls1, ...urls2, ...urls3]
   urls = unique(filter(urls, filterStr))
   return urls
 }
@@ -16,16 +15,18 @@ function unique (urls) {
   return urls
 }
 function filter (urls, filterStr) {
+  filterStr = filterStr.toLowerCase()
   return urls.filter((item) => {
-    if (!/(^http(s)?:\/\/)|(^ftp)|(magnet)|(ed2k)/.test(item.url)) {
+    let link = item.url.toLowerCase()
+    if (!/(^http(s)?:\/\/)|(^ftp)|(^magnet)|(^ed2k)|^(blob:)/.test(link)) {
       return false
     }
     if (filterStr) {
       if (filterStr[0] === '/' && filterStr[filterStr.length - 1] === '/') {
         let regex = new RegExp(filterStr.slice(1, filterStr.length - 1), 'i')
-        return regex.test(item.url)
+        return regex.test(link)
       }
-      return item.url.indexOf(filterStr) > -1
+      return link.indexOf(filterStr) > -1
     }
     return true
   })
@@ -47,6 +48,18 @@ function getLinkUrl () {
 function getImgUrl () {
   let urls = document.querySelectorAll('img[src]')
   urls = [...urls]
+  urls = urls.map((item) => {
+    return {
+      url: item.src,
+      name: item.alt || item.title || item.src.split('/').pop() || Math.random().toString(32).slice(2)
+    }
+  })
+  return urls
+}
+// video src
+function getVideoUrl () {
+  let urls = document.querySelectorAll('video[src]')
+  urls = [...urls]
   urls = urls.map((img) => {
     return {
       url: img.src,
@@ -58,7 +71,16 @@ function getImgUrl () {
 
 // chrome.runtime.sendMessage('sendid')
 chrome.runtime.onMessage.addListener((msg) => {
-  let urls = getDownloadUrls(msg)
-  chrome.runtime.sendMessage(urls)
+  if (msg.type === 'sendFilter') {
+    let urls = getDownloadUrls(msg.data)
+    chrome.runtime.sendMessage({
+      type: 'sendUrl',
+      data: urls
+    })
+  }
+
+  // chrome.runtime.sendMessage(urls)
+  // 发给background
+  // chrome.extension.sendMessage(urls)
 })
 
